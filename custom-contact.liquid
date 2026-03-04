@@ -1,0 +1,397 @@
+{% style %}
+            .contact-custom-{{ section.id }}{
+            padding:50px 0 20px 0;
+            background:{{ section.settings.bg_color }};
+            font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+            }
+
+            .container{
+            max-width:1200px;
+            margin:auto;
+            padding:0 15px;
+            }
+
+            .contact-grid{
+            display:grid;
+            grid-template-columns: 360px 1fr;
+            gap: 50px;
+            align-items: center;
+            }
+
+            @media(max-width:990px){
+            .contact-grid{
+            grid-template-columns:1fr;
+            }
+            }
+
+            .contact-heading{
+            font-size:48px;
+            font-weight:700;
+            margin-bottom:24px;
+            }
+
+            .contact-description{
+            font-size:18px;
+            opacity:.8;
+            margin-bottom:30px;
+            max-width:500px;
+            }
+
+            .contact-info a{
+            display:block;
+            margin-bottom:12px;
+            font-size:18px;
+            text-decoration:none;
+            color:inherit;
+            opacity:.8;
+            }
+
+            .form-card{
+    background:#fff;
+    padding:clamp(20px, 4vw, 40px);
+    border-radius:24px;
+    box-shadow:
+      0 2px 8px rgba(0,0,0,0.05),
+      0 20px 40px rgba(0,0,0,0.08);
+  }
+
+            .form-title{
+            font-size:48px;
+            font-weight:700;
+            margin-bottom:6px;
+            }
+
+            .form-subtitle{
+            font-size:18px;
+            opacity:.6;
+            margin-bottom:30px;
+            }
+
+            .form-row{
+            display:grid;
+            grid-template-columns:1fr 1fr;
+            gap:16px;
+            margin-bottom:16px;
+            }
+
+            @media(max-width:500px){
+            .form-row{
+            grid-template-columns:1fr;
+            }
+            }
+
+            .input{
+            width:100%;
+            padding:14px 18px;
+            border:1px solid #e0e0e0;
+            border-radius:12px;
+            font-size:15px;
+            outline:none;
+            }
+
+            .input:focus{
+            border-color:{{ section.settings.button_color }};
+            }
+
+            textarea.input{
+            min-height:100px;
+            resize:vertical;
+            margin-bottom:10px;
+            }
+
+            .phone-field{
+            margin-bottom:20px;
+            }
+
+            .submit-btn{
+            width:100%;
+            padding:13px;
+            background:{{ section.settings.button_color }};
+            color:#fff;
+            border:none;
+            border-radius:14px;
+            font-size:16px;
+            font-weight:700;
+            cursor:pointer;
+
+            transition: all .3s ease;
+          }
+
+          /* Hover Effect */
+          .submit-btn:hover{
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            opacity:0.95;
+          }
+
+          /* Click Effect */
+          .submit-btn:active{
+            transform: translateY(0);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+          }
+
+          .blocks{
+      margin-top:80px;
+      display:flex;
+      gap:40px;
+      text-align:center;
+    }
+
+    .blocks > *{
+      flex:1;
+    }
+
+    /* Tablet */
+    @media (max-width: 992px){
+      .blocks{
+        display:grid;
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    /* Mobile */
+    @media (max-width: 767px){
+      .blocks{
+        grid-template-columns:1fr;
+      }
+    }
+
+            .block-title{
+            font-weight:700;
+            margin-bottom:10px;
+            font-size: clamp(28px, 4vw, 40px);
+            }
+
+            .block-text{
+            font-size:14px;
+            opacity:.7;
+            }
+
+            @media (max-width: 992px){
+                .contact-info,
+                .contact-heading,
+                .contact-description{
+                    text-align:center;
+                }
+
+      .contact-description{
+        margin-left:auto;
+        margin-right:auto;
+      }
+
+      }
+{% endstyle %}
+
+<section class="contact-custom-{{ section.id }}">
+  <div class="container">
+    <div class="contact-grid">
+      <!-- LEFT SIDE FORM -->
+
+      <div>
+        <h1 class="contact-heading">
+          {{ section.settings.heading }}
+        </h1>
+
+        <p class="contact-description">
+          {{ section.settings.description }}
+        </p>
+
+        <div class="contact-info">
+          <a href="mailto:{{ section.settings.email }}">
+            {{ section.settings.email }}
+          </a>
+
+          <a href="tel:{{ section.settings.phone }}">
+            {{ section.settings.phone }}
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT SIDE INFO -->
+
+      <div>
+        <div class="form-card">
+          <h2 class="form-title">
+            {{ section.settings.form_heading }}
+          </h2>
+
+          <p class="form-subtitle">
+            {{ section.settings.form_subtitle }}
+          </p>
+
+          {% form 'contact' %}
+            <div class="form-row">
+              <input
+                type="text"
+                name="contact[first_name]"
+                placeholder="First name"
+                class="input"
+                required
+              >
+
+              <input
+                type="text"
+                name="contact[last_name]"
+                placeholder="Last name"
+                class="input"
+                required
+              >
+            </div>
+
+            <input
+              type="email"
+              name="contact[email]"
+              placeholder="Your email"
+              class="input"
+              required
+              style="  margin-bottom:15px;"
+            >
+
+            <div class="phone-field">
+              <input
+                type="tel"
+                name="contact[phone]"
+                placeholder="Phone number"
+                class="input"
+              >
+            </div>
+
+            <textarea
+              name="contact[body]"
+              placeholder="How can we help?"
+              class="input"
+              required
+            ></textarea>
+
+            <br>
+
+            <button type="submit" class="submit-btn">
+              {{ section.settings.submit_text }}
+            </button>
+          {% endform %}
+        </div>
+      </div>
+    </div>
+
+    <!-- BOTTOM BLOCKS -->
+
+    <div class="blocks">
+      {% for block in section.blocks %}
+        <div>
+          <h3 class="block-title">
+            {{ block.settings.title }}
+          </h3>
+
+          <p class="block-text">
+            {{ block.settings.text }}
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Contact Custom",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Contact Us",
+      "label": "Heading"
+    },
+
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email"
+    },
+
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Phone"
+    },
+
+    {
+      "type": "text",
+      "id": "form_heading",
+      "default": "Get in Touch",
+      "label": "Form Heading"
+    },
+
+    {
+      "type": "text",
+      "id": "form_subtitle",
+      "default": "We’re Here to Help",
+      "label": "Form Subtitle"
+    },
+
+    {
+      "type": "text",
+      "id": "submit_text",
+      "default": "Submit",
+      "label": "Submit Button"
+    },
+
+    {
+      "type": "color",
+      "id": "bg_color",
+      "default": "#eef4ff",
+      "label": "Background Color"
+    },
+
+    {
+      "type": "color",
+      "id": "button_color",
+      "default": "#2a6edb",
+      "label": "Button Color"
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "info",
+      "name": "Info Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Customer Support",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "default": "Our support team is available around the clock.",
+          "label": "Text"
+        }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Contact Custom",
+      "blocks": [
+        {
+          "type": "info"
+        },
+        {
+          "type": "info"
+        },
+        {
+          "type": "info"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
